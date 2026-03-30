@@ -39,15 +39,27 @@ void wait_for_ping(int from_rank)
 
 int main(int argc, char *argv[]) {
     int rank, size;
+    char hostname[1024];
+
+    hostname[1023] = '\0';
+    gethostname(hostname, 1023);
 
     // Initialize MPI environment
+    printf("Start MPI_Init on host: %s\n", hostname);
     MPI_Init(&argc, &argv);
-
     // Get the number of processes
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
     // Get the rank of this process
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    if (rank == 0)
+    {
+        printf("Successfully Initialized\n");
+        printf("World size: %d\n", size);
+    }
+
+
+    printf("Rank: %d\n", rank);
 
     if (rank != 0 && size > 1)
     {
