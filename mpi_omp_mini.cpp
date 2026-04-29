@@ -1,5 +1,5 @@
 #ifndef _GNU_SOURCE
-    #define _GNU_SOURCE             /* See feature_test_macros(7) */
+#define _GNU_SOURCE             /* See feature_test_macros(7) */
 #include <cstdlib>
 #include <sstream>
 #include <string>
