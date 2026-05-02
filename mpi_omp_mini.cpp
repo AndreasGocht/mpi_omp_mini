@@ -6,6 +6,7 @@
 #endif
 
 #include <mpi.h>
+#include <limits.h>
 #include <sched.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -78,6 +79,7 @@ int main(int argc, char *argv[]) {
     // Get the rank of this process
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+
     std::string in;
     json j;
 
@@ -106,6 +108,11 @@ int main(int argc, char *argv[]) {
         j[rank]["size"] = 0;
     }
 
+
+    char hostname[HOST_NAME_MAX+1];
+    gethostname(hostname, HOST_NAME_MAX+1);
+    std::string hostname_s = hostname;
+    j[rank]["hostname"] = hostname_s;
 
     int omp_num_threads = omp_get_num_threads();
 
